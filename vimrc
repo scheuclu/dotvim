@@ -24,6 +24,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 Plugin 'capitancambio/exuberant-ctags'
 Plugin 'majutsushi/tagbar'
+Plugin 'craigemery/vim-autotag'        "Whenever a file is saved, this plugin redoes all of its entries in the ctags file. Requires phyton support
+Plugin 'Yggdroot/indentLine'
 "YCM need to be compiled on every machine. use the following commands"
 "cd ~/.vim/bundle/YouCompleteMe
 "./install.py --clang-completer
@@ -114,6 +116,15 @@ syntax enable
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
+
+"Code fodoing
+"The following will allow me to use indent as standard fold method, but also
+"have custom folds
+augroup vimrc
+    au BufReadPre * setlocal foldmethod=indent
+      au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+    augroup END
+
 "}}}‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 "{{{basic IDE construction____________________________________________________
@@ -171,14 +182,14 @@ nnoremap <leader>rts :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 " launch NERDTree autoamtically on statup
 "autocmd VimEnter * NERDTree
 "autocmd VimEnter * wincmd p
-autocmd VimEnter * colorscheme 256-grayvim
+autocmd VimEnter * colorscheme devbox-dark-256  "256-grayvim
 "autocmd VimEnter * set background=dark "this command might be needed for some
 "colorshemes
 let g:NERDTreeShowHidden=1 "show hidden files in NERDTree by default
 let g:airline_powerline_fonts=1
 
-let &colorcolumn=join(range(81,81),",")
-highlight ColorColumn ctermbg=7
+highlight ColorColumn ctermbg=magenta "set to whatever you like
+call matchadd('ColorColumn', '\%81v', 100) "set column nr
 
 " automatically open quickfix window after running space
 autocmd QuickFixCmdPost * :copen
@@ -261,7 +272,7 @@ let g:indent_guides_auto_colors=0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=red ctermbg=DarkGrey
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=Black
 let g:indent_guides_color_change_percentage=20
-let g:Indent_guides_guide_size=0.2
+"let g:Indent_guides_guide_size=0.1
 "}}}__________________________________________________________________________
 
 "{{{custom functions__________________________________________________________
