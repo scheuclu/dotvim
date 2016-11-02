@@ -26,6 +26,7 @@ Plugin 'capitancambio/exuberant-ctags'
 Plugin 'majutsushi/tagbar'
 Plugin 'craigemery/vim-autotag'        "Whenever a file is saved, this plugin redoes all of its entries in the ctags file. Requires phyton support
 Plugin 'Yggdroot/indentLine'
+Plugin 'gcmt/taboo.vim'                "provides function to rename vim
 "YCM need to be compiled on every machine. use the following commands"
 "cd ~/.vim/bundle/YouCompleteMe
 "./install.py --clang-completer
@@ -97,6 +98,10 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 filetype plugin on "not sure if this is the required line for NERDCommenter
 
+"{{{defining the leader key__________________________________________________
+let mapleader = "\<Space>"
+"}}}____________________________________________________________________________
+
 
 "{{{vim behaviour_____________________________________________________________
 set hlsearch
@@ -115,7 +120,18 @@ syntax enable
 
 set ai "Auto indent
 set si "Smart indent
+
+"this will visually break the line but not create new lines
 set wrap "Wrap lines
+set linebreak
+set nolist " list disables linebreak
+
+"Change the appearance ot the tabbar so that it is better readable and the
+"current tab is highlighted
+"hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
+hi TabLine ctermbg=White
+hi TabLineSel ctermfg=DarkBlue ctermbg=White
+
 
 "Code fodoing
 "The following will allow me to use indent as standard fold method, but also
@@ -137,7 +153,7 @@ filetype indent on
 "GMSH (Meshing Facilities)
 augroup filetypedetect
 au BufNewFile,BufRead *.geo     setf gmsh
-augroup END 
+augroup END
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -167,9 +183,9 @@ noremap <Right> <NOP>
 
 
 "mapping to simplify navigation between tabs
-noremap <leader><Tab> :tabn<CR>
-noremap <leader>` :tabp<CR>
-noremap <S-N> :tabnew<CR>
+noremap <leader>ll :tabn<CR>
+noremap <leader>hh :tabp<CR>
+noremap <leader>nn :tabnew<CR>
 "}}}‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 "{{{other things______________________________________________________________
@@ -240,7 +256,7 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
@@ -294,3 +310,6 @@ function! MaximizeToggle()
     endif
 endfunction
 "}}}‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+"{{{shortcuts for char-sequences
+map! <leader>ss *<CR>*----------------------------------------------<CR>*
