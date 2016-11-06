@@ -27,6 +27,12 @@ Plugin 'majutsushi/tagbar'
 Plugin 'craigemery/vim-autotag'        "Whenever a file is saved, this plugin redoes all of its entries in the ctags file. Requires phyton support
 Plugin 'Yggdroot/indentLine'
 Plugin 'gcmt/taboo.vim'                "provides function to rename vim
+
+"Snippets support for vim
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'garbas/vim-snipmate'
+
 "YCM need to be compiled on every machine. use the following commands"
 "cd ~/.vim/bundle/YouCompleteMe
 "./install.py --clang-completer
@@ -38,11 +44,17 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'nathanaelkane/vim-indent-guides'
 "}}}‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
+
+"plugin that allows to view csv files naturally
+Plugin 'chrisbra/csv.vim'
+let g:csv_delim=' '
+
 "{{{MATLAB specific stuff_____________________________________________________
 Plugin 'tmhedberg/matchit'                 "extends maching capiabilities of vim to more than just single characters
 Plugin 'jeroendehaas/VimLab' "replicates matlab support; uses tmux and screen
 Plugin 'ervandew/screen'
 Plugin 'lazywei/vim-matlab'
+
 source $VIMRUNTIME/macros/matchit.vim
 autocmd BufEnter *.m    compiler mlint
 
@@ -100,6 +112,9 @@ filetype plugin on "not sure if this is the required line for NERDCommenter
 
 "{{{defining the leader key__________________________________________________
 let mapleader = "\<Space>"
+set noswapfile "stop vim from creating swap files
+set nobackup
+set nowritebackup
 "}}}____________________________________________________________________________
 
 
@@ -111,7 +126,7 @@ set expandtab
 set tags=./tags,./TAGS,tags,TAGS,/usr/lib/petscdir/3.4.2/tags
 
 " 1 tab == 2 spaces
-      set shiftwidth=2
+set shiftwidth=2
 set tabstop=2
 
 set number
@@ -132,6 +147,9 @@ set nolist " list disables linebreak
 hi TabLine ctermbg=White
 hi TabLineSel ctermfg=DarkBlue ctermbg=White
 
+"The following activates the status line(airline) by default. Otherwise it
+"would only be visible in split-screen mode
+set laststatus=2
 
 "Code fodoing
 "The following will allow me to use indent as standard fold method, but also
@@ -186,6 +204,7 @@ noremap <Right> <NOP>
 noremap <leader>ll :tabn<CR>
 noremap <leader>hh :tabp<CR>
 noremap <leader>nn :tabnew<CR>
+noremap <leader>qq :tabclose<CR>
 "}}}‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 "{{{other things______________________________________________________________
@@ -216,7 +235,7 @@ let g:tex_flavour='latex'
 
 " proper ctags call:
 " ctags --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++
-set tags+=/scratch/scheucher/workspace/baci_hiwi/tags
+"set tags+=/scratch/scheucher/workspace/baci_hiwi/tags
 
 "call pathogen#infect()
 "call pathogen#helptags()
@@ -292,7 +311,7 @@ let g:indent_guides_color_change_percentage=20
 "}}}__________________________________________________________________________
 
 "{{{custom functions__________________________________________________________
-nnoremap <leader>t :call MaximizeToggle()<CR>
+nnoremap <leader>m :call MaximizeToggle()<CR>
 
 function! MaximizeToggle()
     if exists("s:maximize_session")
