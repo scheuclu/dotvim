@@ -73,7 +73,7 @@ let g:matlab_vimlab_vertical=1
 
 "{{{latex plugins_____________________________________________________________
 Plugin 'lervag/vimtex'
-Plugin 'vim-latex/vim-latex'
+"Plugin 'vim-latex/vim-latex'
 "}}}‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 "{{{other plugins
