@@ -9,7 +9,7 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=/home/lukas/.vim/bundle/Vundle.vim
+set rtp+=/home/scheucher/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -332,3 +332,12 @@ endfunction
 
 "{{{shortcuts for char-sequences
 map! <leader>ss *<CR>*----------------------------------------------<CR>*
+
+
+
+
+
+augroup filetypedetect
+  au BufRead,BufNewFile *.dat set filetype=cpp
+  " associate *.foo with php filetype
+augroup END
