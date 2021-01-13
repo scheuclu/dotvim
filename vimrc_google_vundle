@@ -1,0 +1,24 @@
+
+"set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" Plugin configuration.
+" See http://google3/devtools/editors/vim/examples/ for example configurations
+" and http://go/vim/plugins for more information about vim plugins at Google.
+
+Plugin 'flazz/vim-colorschemes'
+"autocmd VimEnter * colorscheme devbox-dark-256
+
+autocmd VimEnter * colorscheme 256-grayvim "molokai
+" TODO experiment with different colorschemes
+"
+Plugin 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
+
+call vundle#end()            " required

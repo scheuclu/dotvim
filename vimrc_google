@@ -1,0 +1,121 @@
+" Welcome to Vim (http://go/vim).
+"
+" If you see this file, your homedir was just created on this workstation.
+" That means either you are new to Google (in that case, welcome!) or you
+" got yourself a faster machine.
+" Either way, the main goal of this configuration is to help you be more
+" productive; if you have ideas, praise or complaints, direct them to
+" vi-users@google.com (http://g/vi-users). We'd especially like to hear from you
+" if you can think of ways to make this configuration better for the next
+" Noogler.
+" If you want to learn more about Vim at Google, see http://go/vimintro.
+
+" Enable modern Vim features not compatible with Vi spec.
+set nocompatible
+
+
+source ~/.vim/vimrc_google_specific
+source ~/.vim/vimrc_google_vundle
+
+
+" All of your plugins must be added before the following line.
+" See go/vim-plugin-manager if you need help picking a plugin manager and
+" setting it up.
+
+" Enable file type based indent configuration and syntax highlighting.
+" Note that when code is pasted via the terminal, vim by default does not detect
+" that the code is pasted (as opposed to when using vim's paste mappings), which
+" leads to incorrect indentation when indent mode is on.
+" To work around this, use ":set paste" / ":set nopaste" to toggle paste mode.
+" You can also use a plugin to:
+" - enter insert mode with paste (https://github.com/tpope/vim-unimpaired)
+" - auto-detect pasting (https://github.com/ConradIrwin/vim-bracketed-paste)
+
+
+
+"╦  ╦╦╔╦╗   ╔═╗╦  ╔═╗╔═╗╔═╗
+"╚╗╔╝║║║║───╠╣ ║  ╠═╣║ ╦╚═╗
+" ╚╝ ╩╩ ╩   ╚  ╩═╝╩ ╩╚═╝╚═╝
+set number
+" Highlight search results(highlichts all matches of last search)
+set hlsearch
+set ruler "Not sure what this actually does
+
+"dont use the actual tab character
+set expandtab
+" indenting is 4 spaces
+set shiftwidth=2
+" turns it on
+set autoindent
+" does the right thing (mostly) in programs
+set smartindent
+" Highlight search results
+set hlsearch
+
+" Visual indicatior for column border
+set colorcolumn=100
+" execute "set colorcolumn=" . join(range(100,335), ',')
+
+"Change the appearance ot the tabbar so that it is better readable and the
+"current tab is highlighted
+"hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
+hi TabLine ctermfg=Black ctermbg=White
+hi TabLineSel ctermfg=Black ctermbg=DarkBlue
+
+set t_Co=256 "TODO experimental, might cause problems
+" See http://vim.wikia.com/wiki/256_colors_in_vim
+hi ColorColumn ctermfg=Green ctermbg=DarkBlue "TODO change this
+set showtabline=2
+
+
+
+"╔═╗╦ ╦╔═╗╦═╗╔╦╗╔═╗╦ ╦╔╦╗╔═╗
+"╚═╗╠═╣║ ║╠╦╝ ║ ║  ║ ║ ║ ╚═╗
+"╚═╝╩ ╩╚═╝╩╚═ ╩ ╚═╝╚═╝ ╩ ╚═╝
+
+inoremap jk <esc>
+"cnoremap jk <esc>
+
+nnoremap <leader>s :w<cr>
+nnoremap <leader>ev :split $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>eq :q<cr>
+
+nnoremap ,g :GoogleOutlineWindow<CR>
+
+
+" Deactivate these keys for now
+nnoremap <C-Left> <Nop>
+nnoremap <C-Right> <Nop>
+nnoremap <C-Up> <Nop>
+nnoremap <C-Down> <Nop>
+
+nnoremap <M-Left> <Nop>
+nnoremap <M-Right> <Nop>
+nnoremap <M-Up> <Nop>
+nnoremap <M-Down> <Nop>
+
+nnoremap <C-h> :tabprevious<CR>
+nnoremap <C-l> :tabnext<CR>
+
+":set paste
+":set nopaste
+set pastetoggle=<F3>
+
+"╔═╗╔╦╗╦ ╦╔═╗╦═╗
+"║ ║ ║ ╠═╣║╣ ╠╦╝
+"╚═╝ ╩ ╩ ╩╚═╝╩╚═
+
+filetype plugin indent on
+filetype plugin on
+syntax on
+
+
+" set 'updatetime' to 15 seconds when in insert mode
+au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
+au InsertLeave * let &updatetime=updaterestore
+
+" This will only work if vim has been compiled to support this
+" Check the clipboard support of your Vim with vim --version and look for the
+" +clipboard or +xterm_clipboard flags.
+set clipboard=unnamedplus

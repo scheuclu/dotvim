@@ -1,0 +1,119 @@
+
+" Use the 'google' package by default (see http://go/vim/packages).
+source /usr/share/vim/google/google.vim
+
+" Plugin loading is commented out below - uncomment the plugins you'd like to
+" load.
+
+" Load google's formatting plugins (http://go/vim/plugins/codefmt-google).
+" The default mapping is \= (or <leader>= if g:mapleader has a custom value),
+" with
+" - \== formatting the current line or selected lines in visual mode
+"   (:FormatLines).
+" - \=b formatting the full buffer (:FormatCode).
+"
+" To bind :FormatLines to the same key in insert and normal mode, add:
+"   noremap <C-K> :FormatLines<CR>
+"   inoremap <C-K> <C-O>:FormatLines<CR>
+Glug codefmt gofmt_executable="goimports"
+Glug codefmt-google
+
+" Enable autoformatting on save for the languages at Google that enforce
+" formatting, and for which all checked-in code is already conforming (thus,
+" autoformatting will never change unrelated lines in a file).
+" Note formatting changed lines only isn't supported yet
+" (see https://github.com/google/vim-codefmt/issues/9).
+"augroup autoformat_settings
+ autocmd FileType bzl AutoFormatBuffer buildifier "TODO autoformat BUILD files when they are saved
+"  autocmd FileType go AutoFormatBuffer gofmt
+"  See go/vim/plugins/codefmt-google, :help codefmt-google and :help codefmt
+"  for details about other available formatters.
+"augroup END
+
+
+" Load YCM (http://go/ycm) for semantic auto-completion and quick syntax
+" error checking. Pulls in a google3-enabled version of YCM itself and
+" a google3-specific default configuration.
+Glug youcompleteme-google
+"let g:ycm_server_python_interpreter = '' #TODO I might be able to force the
+"google interpreter with this.
+"
+" Automatically leave preview after insertion is done
+ let g:ycm_autoclose_preview_window_after_completion = 1
+
+" Automatically close preview when leaving insert mode
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" For semantic completion. TODO read up on this
+let g:ycm_key_invoke_completion = '<C-Space>'
+
+let g:ycm_key_detailed_diagnostics = '<leader>d'
+
+" Load the automated blaze dependency integration for Go.
+" Note: for Go, blazedeps uses the Go team's glaze tool, which is fully
+" supported by the Go team. The plugin is currently unsupported for other
+" languages.
+Glug blazedeps auto_filetypes=`['go']`
+
+" Load piper integration (http://go/VimPerforce).
+ Glug piper plugin[mappings]
+Glug relatedfiles plugin[mappings]
+ Glug g4
+
+" Load Critique integration. Use :h critique for more details.
+"Glug critique plugin[mappings]
+
+" Load blaze integration (http://go/blazevim).
+Glug blaze plugin[mappings]
+
+" Load the syntastic plugin (http://go/vim/plugins/syntastic-google).
+" Note: this requires installing the upstream syntastic plugin from
+" https://github.com/vim-syntastic/syntastic.
+"Glug syntastic-google
+
+" Load the ultisnips plugin (http://go/ultisnips).
+" Note: this requires installing the upstream ultisnips plugin from
+" https://github.com/SirVer/ultisnips.
+"Glug ultisnips-google
+
+" :QuickOutline <pattern> <optional filetype>
+Glug outline-window
+
+"highlights and helps strip certain potentially-invalid whitespace.
+Glug whitespace
+
+Glug syntastic-google
+let g:syntastic_python_checkers = ['python'] " TODO this is not ideal ':help syntastic-checkers-python' for documentation
+let g:syntastic_python_python_exec = 'python3'
+
+Glug corpweb plugin[mappings]
+nmap <leader>cs :CorpWebCs<Space>
+
+"TODO there is a collision between corpweb and nerdcommenter
+"resolve when there is time
+Glug ft-python
+Glug ft-cpp
+
+
+Glug ultisnips-google
+let g:UltiSnipsExpandTrigger = "<c-u>"
+let g:UltiSnipsJumpForwardTrigger = "<c-i>"
+""" let g:UltiSnipsJumpBackwardTrigger = "<c-i>"
+
+Glug colorscheme-primary
+
+
+"
+
+" ╦╔═╗╦  ╦╔═╗
+" ║╠═╣╚╗╔╝╠═╣
+"╚╝╩ ╩ ╚╝ ╩ ╩
+
+" Helping with imports (So far only JAVA, 2019)
+Glug gtimporter
+"noremap <unique> <leader>j :GtImporter<CR>"TODO uncomment when starting to use
+"JAVA
+" Sort the JAVA import statements
+autocmd FileType java AutoFormatBuffer gtimporter
+Glug codefmt-google auto_filetypes+=java
+
